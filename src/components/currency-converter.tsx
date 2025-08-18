@@ -3,14 +3,29 @@ import CurrencyDropdown from "./dropdown";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 
 const CurrencyConverter = () => {
+  // State variables
   const [currencies, setCurrencies] = useState<string[]>([]);
+  // Amount to convert
+  // Using number | string to handle empty input gracefully
   const [amount, setAmount] = useState<number | string>(1);
-  // Default currencies
+
+  // From and To currencies
+  // Defaulting to USD and INR for demonstration purposes
   const [fromCurrency, setFromCurrency] = useState<string>("USD");
   const [toCurrency, setToCurrency] = useState<string>("INR");
+
+  // Converted amount and state for conversion
+  // Using string | null to handle cases where conversion hasn't happened yet
   const [convertedAmount, setConvertedAmount] = useState<string | null>(null);
   const [converting, setConverting] = useState<boolean>(false);
+
+  // Error state to handle any issues during conversion
+  // Using string | null to handle cases where no error has occurred
   const [error, setError] = useState<string | null>(null);
+
+  // Favorites state to manage favorite currencies
+  // Defaulting to some common currencies for demonstration purposes
+  // Using string[] to store an array of favorite currency codes
   const [favorites, setFavorites] = useState(() => {
     const stored = localStorage.getItem("favorites");
     return stored ? JSON.parse(stored) : ["USD", "EUR", "INR"];
@@ -21,6 +36,7 @@ const CurrencyConverter = () => {
     fetchCurrencies();
   }, []);
 
+  // Fetch currencies from the API
   const fetchCurrencies = async () => {
     try {
       const response = await fetch("https://api.frankfurter.dev/v1/currencies");
@@ -34,6 +50,7 @@ const CurrencyConverter = () => {
     }
   };
 
+  // Convert currency when the user clicks the convert button
   const convertCurrency = async () => {
     setError(null);
     setConvertedAmount(null);
@@ -62,6 +79,7 @@ const CurrencyConverter = () => {
     }
   };
 
+  // Handle favorite currencies
   const handleFavorite = (currency: string) => {
     // Logic to handle favorite currencies
     let updatedFavorites = [...favorites];
@@ -75,6 +93,7 @@ const CurrencyConverter = () => {
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
+  // Swap currencies
   const swapCurrencies = () => {
     setFromCurrency(toCurrency);
     setToCurrency(fromCurrency);
