@@ -36,7 +36,11 @@ const CurrencyConverter = () => {
     fetchCurrencies();
   }, []);
 
-  // Fetch currencies from the API
+  /**
+   * Fetch currencies from the api
+   *
+   * @returns void
+   */
   const fetchCurrencies = async () => {
     try {
       const response = await fetch("https://api.frankfurter.dev/v1/currencies");
@@ -50,7 +54,11 @@ const CurrencyConverter = () => {
     }
   };
 
-  // Convert currency when the user clicks the convert button
+  /**
+   * Convert currency when the user clicks the convert button
+   *
+   * @returns Error
+   */
   const convertCurrency = async () => {
     setError(null);
     setConvertedAmount(null);
@@ -80,6 +88,12 @@ const CurrencyConverter = () => {
   };
 
   // Handle favorite currencies
+  /**
+   * Handle favorite currencies
+   * @param currency
+   *
+   * @returns void
+   */
   const handleFavorite = (currency: string) => {
     // Logic to handle favorite currencies
     let updatedFavorites = [...favorites];
@@ -94,6 +108,11 @@ const CurrencyConverter = () => {
   };
 
   // Swap currencies
+  /**
+   * Swap currencies
+   *
+   * @returns void
+   */
   const swapCurrencies = () => {
     setFromCurrency(toCurrency);
     setToCurrency(fromCurrency);
@@ -170,6 +189,7 @@ const CurrencyConverter = () => {
         </button>
       </div>
 
+      {/* If error, then display the error with this component */}
       {error && (
         <div
           aria-label="error"
@@ -179,6 +199,7 @@ const CurrencyConverter = () => {
         </div>
       )}
 
+      {/* If converted value, display the converted value */}
       {convertedAmount && (
         <div className="mt-4 text-lg font-medium text-right text-green-600">
           <p>Converted Amount: {convertedAmount}</p>
