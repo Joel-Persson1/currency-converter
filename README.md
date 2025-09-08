@@ -1,69 +1,74 @@
-# React + TypeScript + Vite
+# 💱 Currency Converter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Detta är en enkel men kraftfull valutakonverterare byggd med **React**, **TypeScript** och **Tailwind CSS**. Applikationen låter användaren konvertera ett belopp från en valuta till en annan på ett snabbt och smidigt sätt.
 
-Currently, two official plugins are available:
+## 📝 Hur man startar
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Klonar du repositoryn och installerar dependencies med `npm install` och startar applikationen med `npm run dev`.
 
-## Expanding the ESLint configuration
+## ✨ Funktionalitet
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Välj två olika valutor från en lista med tillgängliga valutor.
+- Ange ett belopp för att konvertera.
+- Se det konverterade beloppet i realtid.
+- Spara favoritvalutor som visas överst i listan.
+- Markera/avmarkera valutor som favoriter med en stjärnikon.
+- Få tydliga felmeddelanden vid ogiltiga belopp eller om samma valuta väljs i båda fälten.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📱 Responsiv Design
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+Applikationen är helt responsiv och fungerar bra på både dator, surfplatta och mobil.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🔒 Säkerhet och Felhantering
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Kontrollerar att beloppet inte är tomt, noll eller negativt innan konvertering.
+- Begränsar maxbeloppet till **1 000 000** för att undvika orimliga konverteringar.
+- Döljer valutan som redan är vald i det andra fältet, vilket förhindrar att samma valuta väljs två gånger.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🧪 Tester
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Applikationen är testad med **Cypress** för att säkerställa en stabil och förutsägbar användarupplevelse. Följande scenarier täcks:
+
+- **Renderar huvudkomponenterna** – Säkerställer att alla UI-element laddas korrekt.
+- **Ändrar beloppsfältet** – Testar att användaren kan ange och ändra belopp.
+- **Väljer olika valutor i dropdown-menyerna** – Verifierar att det går att välja olika valutor.
+- **Byter plats på valutor vid swap** – Testar att swap-knappen fungerar som förväntat.
+- **Konverterar valuta och visar resultatet** – Säkerställer korrekt konvertering och visning.
+- **Favoritmarkerar en valuta** – Testar att man kan markera och avmarkera valutor som favoriter.
+- **Visar fel för tomt belopp** – Visar felmeddelande om inget belopp anges.
+- **Visar fel för noll eller negativt belopp** – Visar felmeddelande för ogiltiga belopp.
+- **Begränsar maxbeloppet till 1 000 000** – Förhindrar för höga belopp.
+- **Förhindrar val av samma valuta i båda fälten** – Säkerställer att två olika valutor väljs.
+- **Favoritmarkering fungerar i båda dropdown-menyerna** – Testar funktionalitet i båda listorna.
+- **Visar laddningsanimation vid konvertering** – Ger feedback medan beräkningen pågår.
+- **Visar felmeddelande vid API-fel** – Testar att användaren informeras vid misslyckad förfrågan.
+- **Sparar favoriter i localStorage** – Säkerställer att favoritvalutor sparas i webbläsaren.
+
+## 💭 Reflektion
+
+Jag valde att bygga projektet med **Vite** och **React** eftersom det är en liten applikation där fokus ligger på funktionalitet snarare än SEO.  
+Jag använde **Cypress** för tester eftersom det är enkelt att sätta upp och integrera med applikationen.  
+**Tailwind CSS** valdes för sin smidiga integration med komponenter, och **TypeScript** för att göra koden mer robust och förhindra vanliga buggar.
+
+### ✅ Styrkor
+
+- Brett testomfång som täcker alla centrala funktioner.
+- Responsiv design som fungerar på alla enheter.
+- Enkel och tydlig användarupplevelse med fokus på funktionalitet.
+
+### ⚠️ Svagheter
+
+- Täcker inte alla världens valutor (fokus på de vanligaste).
+- Väldigt enkel design som hade kunnat förbättras ytterligare.
+
+### 🔧 Möjliga förbättringar
+
+- Förbättrad design och mer visuella felmeddelanden.
+- Stöd för fler valutor.
+- Lägga till flaggor eller symboler för varje valuta för en snabbare och mer intuitiv upplevelse.
+
+## 📚 Vad jag har lärt mig
+
+- Fördjupat mina kunskaper i **TypeScript** och **Tailwind CSS**.
+- Lärt mig skriva och strukturera tester i **Cypress**.
+- Fått erfarenhet av hur man bygger en säkrare och mer användarvänlig applikation.
